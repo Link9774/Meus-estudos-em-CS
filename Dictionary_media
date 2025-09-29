@@ -1,0 +1,19 @@
+class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary<string, object> aluno = new Dictionary<string, object>();
+
+        aluno["Nome"] = "Pedro";
+        aluno["Notas"] = new List<double> { 7.0, 8.5, 10, 5, 5.5, 8, };
+
+        List<double> notas = (List<double>)aluno["Notas"];
+
+        double media = notas.Average();
+
+        Console.WriteLine($"Aluno: {aluno["Nome"]}");
+        Console.WriteLine("Notas: "+ string.Join(", ", notas));
+        Console.WriteLine($"Média: {media:F2}");
+    }
+    
+}
