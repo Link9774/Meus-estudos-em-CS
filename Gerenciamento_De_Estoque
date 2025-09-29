@@ -25,6 +25,9 @@ void Menu()
         case 3:
             ProcurarItem();
             break;
+        case 4:
+            Atualizar();
+            break;
         case 0:
             Console.WriteLine("Até um outro dia senhor.");
             break;
@@ -62,6 +65,29 @@ void MostrarProdutos()
 
 void ProcurarItem()
 {
+    Console.Clear();
+    Console.WriteLine("Digite o produto q deseja saber a quantidade");
 
+    string nomeProduto = Console.ReadLine()!;
+
+    if (produto.ContainsKey(nomeProduto))
+    {
+        List<int> qtdProduto = produto[nomeProduto];
+        int total = qtdProduto.Sum();
+
+        Console.WriteLine($"\nProduto encontrado: {nomeProduto}");
+        Console.WriteLine($"Quantidade em estoque: {total}");
+    }else{
+        Console.WriteLine($"\nProduto '{nomeProduto}' não encontrado");
+        Thread.Sleep(3000);
+        ProcurarItem();
+    }
+    Console.WriteLine("\nAperte qualquer tecla para voltar ao menu");
+    Console.ReadKey();
+    Menu();
+}
+void Atualizar()
+{
+    
 }
 Menu();
