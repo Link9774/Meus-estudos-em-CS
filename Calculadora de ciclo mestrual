@@ -1,0 +1,41 @@
+class Program
+{
+    static void Main()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Calculadora de Ciclo mestrual ===\n");
+
+        Console.WriteLine("Digite a data da última mestruação (dd/mm/aaaa): ");
+        DateTime ultimaMestruacao;
+
+        while (!DateTime.TryParse(Console.ReadLine(), out ultimaMestruacao))
+        {
+            Console.WriteLine("Data inválida! Digite novamente (dd/mm/aaaa) ");
+        }
+
+        Console.Write("Digite a duração média do seu ciclo (em dias) ");
+        int duracaoCiclo;
+
+        while (!int.TryParse(Console.ReadLine(), out duracaoCiclo) || duracaoCiclo < 20 || duracaoCiclo > 40)
+        {
+            Console.Write("Valor inválido! Digite novamente (entre 20 e 40 dias)");
+        }
+        DateTime proximaMestruacao = ultimaMestruacao.AddDays(duracaoCiclo);
+        DateTime ovulacao = proximaMestruacao.AddDays(-14);
+        DateTime incioFertil = ovulacao.AddDays(-3);
+        DateTime fimFertil = ovulacao.AddDays(1);
+
+        Console.WriteLine("\n=== Resultados ===");
+        Console.WriteLine($"Última menstruação: {ultimaMestruacao:dd/MM/yyyy}");
+        Console.WriteLine($"Próxima menstruação prevista: {proximaMestruacao:dd/MM/yyyy}");
+        Console.WriteLine($"Dia provável da ovulação: {ovulacao:dd/MM/yyyy}");
+        Console.WriteLine($"Período fértil: {incioFertil:dd/MM/yyyy} até {fimFertil:dd/MM/yyyy}");
+
+        int diasRestantes = (proximaMestruacao - DateTime.Today).Days;
+        Console.WriteLine($"\nFaltam {diasRestantes} dias para a próxima mestruação");
+
+        Console.WriteLine("\nPressione qualquer tecla para sair");
+        Console.ReadLine();
+    
+    }
+}
